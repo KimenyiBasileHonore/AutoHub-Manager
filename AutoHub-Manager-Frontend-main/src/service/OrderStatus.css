@@ -1,0 +1,49 @@
+.order-status-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: grey;
+    position: relative;
+    text-align: center;
+}
+
+.status-item.active {
+    color: green;
+}
+
+.status-item.current {
+    flex-direction: column;
+    background-color: #d1ffd6;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.truck-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 8px;
+}
+
+.arrow {
+    margin: 0 12px;
+    font-size: 1.2rem;
+    color: grey;
+}
+
+.arrow.active-arrow {
+    color: green;
+}
+
+.status-text {
+    font-weight: bold;
+    margin: 0 8px;
+}

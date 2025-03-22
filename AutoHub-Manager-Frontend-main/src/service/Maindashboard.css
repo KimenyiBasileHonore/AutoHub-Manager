@@ -1,0 +1,56 @@
+.pdf-button-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pdf-button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: Left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pdf-button:hover {
+    background-color: #45a049;
+  }
+  
+  .yeye{
+    text-align: center;
+  }
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .center-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .custom-hr {
+    font-size: 8rem; /* Adjust the font size as needed */
+    /* Add any other custom styles if necessary */
+  }
+
+  .pdf-date {
+    position: fixed;
+    bottom: 20px; /* Adjust the value to set the desired distance from the bottom */
+    text-align: center;
+    width: 100%;
+  }
+  
+  
+  .underline-space {
+    font-size: 2rem; 
+    color: black;
+  }
+  
+  
