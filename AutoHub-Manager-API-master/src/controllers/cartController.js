@@ -195,6 +195,34 @@ export const updateProductStock = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+  
+ 
+  // Fetch cart items based on order status
+  export const getProductsByOrderStatus = async (req, res) => {
+    try {
+      const { status } = req.query; // Retrieve status from query parameters (e.g., 'PROCESSING', 'DELIVERED', 'SHIPPED')
+  
+      if (!status) {
+        return res.status(400).json({ message: "Order status is required" });
+      }
+  
+      // Find products with the given order status
+      const cartItems = await Cart.find({ orderStatus: status })
+        .populate('productId')  // Assuming the productId references a 'Product' model
+        .populate('user')       // Assuming user references the 'CLIENT' model
+        .exec();
+  
+      if (!cartItems || cartItems.length === 0) {
+        return res.status(404).json({ message: `No products found for order status: ${status}` });
+      }
+  
+      return res.status(200).json(cartItems);
+    } catch (error) {
+      console.error("Error fetching cart items by order status:", error);
+      return res.status(500).json({ message: "Server error" });
+    }
+  };
+  
 
   export const bookAppointment = async (req, res) => {
     try {

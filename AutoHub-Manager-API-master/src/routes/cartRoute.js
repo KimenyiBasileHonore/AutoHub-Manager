@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import {addToCart, getCartForUser,updateProductStock, getAllCartItems, deleteProductItemById, clearCartForUser, updateOrderStatus,  getOrderStatus, bookAppointment, getAllAppointmentsForUser, countAllCartProducts, getTopSellingProduct } from '../controllers/cartController.js';
+import {addToCart, getCartForUser,updateProductStock, getAllCartItems,getProductsByOrderStatus, deleteProductItemById, clearCartForUser, updateOrderStatus,  getOrderStatus, bookAppointment, getAllAppointmentsForUser, countAllCartProducts, getTopSellingProduct } from '../controllers/cartController.js';
 import checkAuth from '../middleware/checkAuthentication.js';
 
 router.post('/add-to-cart', checkAuth, addToCart);
@@ -15,7 +15,7 @@ router.get('/all-appointments', getAllAppointmentsForUser);
 router.get('/count-all-cart-products', countAllCartProducts);
 router.get('/top-selling-product', getTopSellingProduct);
 router.put('/update-product-stock', updateProductStock);
-
+router.get('/products-by-status', getProductsByOrderStatus);
 
 
 

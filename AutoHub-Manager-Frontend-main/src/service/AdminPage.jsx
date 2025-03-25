@@ -1,29 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  Search, 
-  ArrowLeft, 
-  Users, 
-  Briefcase, 
-  Download, 
-  LogOut, 
-  RefreshCw, 
-  Mail, 
-  Phone, 
-  Map, 
-  Building, 
-  Shield, 
-  Bell, 
-  Calendar,
-  Clock,
-  ChevronDown,
-  PieChart,
-  BarChart,
-  TrendingUp
+import {
+    Search,
+    ArrowLeft,
+    Users,
+    Briefcase,
+    Download,
+    LogOut,
+    RefreshCw,
+    Mail,
+    Phone,
+    Map,
+    Building,
+    Shield,
+    Bell,
+    Calendar,
+    Clock,
+    ChevronDown,
+    PieChart,
+    BarChart,
+    TrendingUp
 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import Repot from './Repot';
+import ProductInDatqbase from './ProductInDatqbase'
 
 function AdminPage() {
     const [clients, setClients] = useState([]);
@@ -40,7 +42,7 @@ function AdminPage() {
             try {
                 const clientsResponse = await axios.get('http://localhost:4000/api/user/client-list');
                 const vendorsResponse = await axios.get('http://localhost:4000/api/user/vendors');
-                
+
                 setClients(clientsResponse.data.users);
                 setVendors(vendorsResponse.data.vendors);
             } catch (error) {
@@ -88,7 +90,7 @@ function AdminPage() {
         try {
             const clientsResponse = await axios.get('http://localhost:4000/api/user/client-list');
             const vendorsResponse = await axios.get('http://localhost:4000/api/user/vendors');
-            
+
             setClients(clientsResponse.data.users);
             setVendors(vendorsResponse.data.vendors);
         } catch (error) {
@@ -110,35 +112,42 @@ function AdminPage() {
                     </div>
                 </div>
                 <nav className="mt-6">
-                    <div 
+                    <div
                         className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === 'dashboard' ? 'bg-gray-200' : 'hover:bg-indigo-300'}`}
                         onClick={() => setActiveTab('dashboard')}
                     >
                         <PieChart className="mr-3" size={20} />
                         <span>Dashboard</span>
                     </div>
-                    <div 
+                    <div
                         className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === 'clients' ? 'bg-gray-200' : 'hover:bg-indigo-300'}`}
                         onClick={() => setActiveTab('clients')}
                     >
                         <Users className="mr-3" size={20} />
                         <span>Clients</span>
                     </div>
-                    <div 
+                    <div
                         className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === 'vendors' ? 'bg-gray-200' : 'hover:bg-indigo-300'}`}
                         onClick={() => setActiveTab('vendors')}
                     >
                         <Briefcase className="mr-3" size={20} />
                         <span>Internal Staff</span>
                     </div>
-                    <div 
+                    <div
                         className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === 'reports' ? 'bg-gray-200' : 'hover:bg-indigo-300'}`}
-                        onClick={() => setActiveTab('reports')}
+                        onClick={() => setActiveTab('reports')} // Changed from navigate('reports')
                     >
                         <BarChart className="mr-3" size={20} />
                         <span>Reports</span>
                     </div>
-                    <div 
+                    {/* <div
+                        className={`flex items-center px-4 py-3 cursor-pointer ${activeTab === 'reports' ? 'bg-gray-200' : 'hover:bg-indigo-300'}`}
+                        onClick={() => navigate('/Repot')} // Redirects to the "reports" page
+                    >
+                        <BarChart className="mr-3" size={20} />
+                        <span>Reports</span>
+                    </div> */}
+                    <div
                         className="flex items-center px-4 py-3 cursor-pointer text-red-300 hover:bg-indigo-700 mt-24"
                         onClick={handleLogout}
                     >
@@ -181,14 +190,14 @@ function AdminPage() {
                             </div>
                         </div>
                         <div className="flex gap-3">
-                            <button 
-                                onClick={refreshData} 
+                            <button
+                                onClick={refreshData}
                                 className="flex items-center bg-white text-gray-700 py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-50"
                             >
                                 <RefreshCw size={16} className="mr-2" /> Refresh
                             </button>
-                            <button 
-                                onClick={downloadPDF} 
+                            <button
+                                onClick={downloadPDF}
                                 className="flex items-center bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700"
                             >
                                 <Download size={16} className="mr-2" /> Export PDF
@@ -238,18 +247,18 @@ function AdminPage() {
                             {/* Search Bar */}
                             <div className="flex items-center bg-white p-3 rounded-lg shadow-md mb-6">
                                 <Search className="text-gray-500 ml-2" />
-                                <input 
-                                    type="text" 
-                                    placeholder="Search clients or staff..." 
-                                    value={search} 
-                                    onChange={(e) => setSearch(e.target.value)} 
+                                <input
+                                    type="text"
+                                    placeholder="Search clients or staff..."
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
                                     className="ml-2 w-full p-2 outline-none"
                                 />
                             </div>
 
                             {/* Tabs */}
                             <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-                                <div className="flex border-b">
+                                {/* <div className="flex border-b">
                                     <button 
                                         className={`flex-1 py-4 font-medium ${activeTab === 'clients' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-600 hover:text-indigo-600'}`}
                                         onClick={() => setActiveTab('clients')}
@@ -266,6 +275,13 @@ function AdminPage() {
                                             <Briefcase size={16} className="mr-2" /> Internal Staff
                                         </span>
                                     </button>
+                                </div> */}
+                                <div className="flex border-b">
+                                    <Repot />
+                                </div>
+                                <n/>
+                                <div>
+                                <ProductInDatqbase /> 
                                 </div>
 
                                 <div className="p-4">

@@ -21,6 +21,7 @@ import PaymentFailure from "./service/PaymentFailure";
 import About from "./pages/About";
 import Admoverview from './service/AdmOverview';
 import AdminPage from './service/AdminPage';
+import Repot from './service/Repot';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <Route path="PaymentSuccess" element ={<PaymentSuccess/>}/>
         <Route path="PaymentFailure" element ={<PaymentFailure/>}/>
         <Route path="About" element ={<About/>}/>
+        <Route path="Repot" element ={<Repot/>}/>
         
         
         

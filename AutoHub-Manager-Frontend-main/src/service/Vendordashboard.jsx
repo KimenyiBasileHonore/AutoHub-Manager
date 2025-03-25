@@ -9,7 +9,7 @@ import database from "../pic/database.png";
 import handshake from "../pic/handshake.png";
 import thumbnails from "../pic/thumbnails.png";
 import chat from "../pic/chat.png"
-import Filereport from "./Filereport";
+import Repot from "./Repot";
 import Admoders from "./Admoders";
 import Aggrement from "./Aggrement";
 import AdmData from "./AdmData";
@@ -135,7 +135,7 @@ function Dashboard() {
               <section className="text-gray-600 body-font">
                 <div className="container px-5 mx-auto">
                   <div className="flex flex-wrap -m-4">
-                    <Filereport />
+                    <Repot />
                   </div>
                 </div>
               </section>
